@@ -604,7 +604,7 @@ void Tracking::newParameterLoader(Settings *settings) {
     Sophus::SE3f Tbc = settings->Tbc();
     mInsertKFsLost = settings->insertKFsWhenLost();
     mImuFreq = settings->imuFrequency();
-    mImuPer = 0.001; //1.0 / (double) mImuFreq;     //TODO: ESTO ESTA BIEN?
+    mImuPer = 1.0 / (double) mImuFreq;
     float Ng = settings->noiseGyro();
     float Na = settings->noiseAcc();
     float Ngw = settings->gyroWalk();
@@ -1341,7 +1341,7 @@ bool Tracking::ParseIMUParamFile(cv::FileStorage &fSettings)
     if(!node.empty() && node.isInt())
     {
         mImuFreq = node.operator int();
-        mImuPer = 0.001; //1.0 / (double) mImuFreq;
+        mImuPer = 1.0 / (double) mImuFreq;
     }
     else
     {
